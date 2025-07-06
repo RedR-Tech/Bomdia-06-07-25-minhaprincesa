@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Motivos do meu amor ❤️</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #f953c6, #b91d73);
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    #mensagem {
+      font-size: 24px;
+      max-width: 90%;
+      white-space: pre-line;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música de fundo -->
+  <audio id="musica" autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <div id="mensagem"></div>
+
+  <script>
+    const mensagemEl = document.getElementById("mensagem");
+    const musica = document.getElementById("musica");
+    const textoInicial = [
+      "2 motivos que amo você:",
+      "1. Seu sorriso"
+    ];
+
+    const mensagemExtra = "Você achou que seriam apenas 2?";
+    
+    const motivos = [
+      "2. Seu cabelo",
+      "3. Seu cheiro",
+      "4. Seu amor",
+      "5. Seu carinho",
+      "6. Sua voz",
+      "7. Seu nariz",
+      "8. Sua boca",
+      "9. Seus olhos",
+      "10. Seu rosto",
+      "11. Suas mãos",
+      "12. Seus pezinhos",
+      "13. Seu respeito",
+      "14. Sua bondade",
+      "15. Sua humildade",
+      "16. Seu companheirismo",
+      "17. Sua sabedoria",
+      "18. Sua força de vontade",
+      "19. Cada palavra sua",
+      "20. Seu jeitinho de ser",
+      "21. Nervosa às vezes (linda)",
+      "22. Seus soninhos",
+      "23. O bafinho ao acordar meu",
+      "24. O seu bom dia para mim",
+      "25. O seu boa noite para mim",
+      "26. E porque eu amo você, e só quero você ❤️😍",
+      "",
+      "Que você tenha um ótimoo diaaa minha princesa,\nque você fique bem mais sua família,\namo muito você,\nvocê é muito especial para mim, saiba disso sempre ❤️"
+    ];
+
+    // função que escreve letra por letra
+    function escrever(texto, delay = 100) {
+      return new Promise((resolve) => {
+        let i = 0;
+        const intervalo = setInterval(() => {
+          mensagemEl.innerHTML += texto[i];
+          i++;
+          if (i >= texto.length) {
+            clearInterval(intervalo);
+            mensagemEl.innerHTML += "<br><br>";
+            resolve();
+          }
+        }, delay);
+      });
+    }
+
+    // função principal para mostrar tudo na ordem
+    async function mostrarTudo() {
+      for (let linha of textoInicial) {
+        await escrever(linha);
+      }
+      await new Promise(r => setTimeout(r, 1000));
+      await escrever(mensagemExtra, 70);
+
+      for (let motivo of motivos) {
+        await escrever(motivo, 40);
+        await new Promise(r => setTimeout(r, 150));
+      }
+    }
+
+    // Iniciar após garantir autoplay
+    window.addEventListener('DOMContentLoaded', () => {
+      musica.play().catch(() => {});
+      mostrarTudo();
+    });
+  </script>
+
+</body>
+</html>
